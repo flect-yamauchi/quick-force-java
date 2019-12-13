@@ -152,6 +152,8 @@ public class Application extends Controller {
                     completableFuture.completeExceptionally(new AuthException(jsonNode.get("error").textValue()));
                     return completableFuture;
                 } else {
+                    System.out.println("SUCCESS:QUERY RUNNIG");
+                    System.out.println("JSON value:"+jsonNode.textValue());
                     QueryResultAccount queryResultAccount = Json.fromJson(jsonNode, QueryResultAccount.class);
                     return CompletableFuture.completedFuture(queryResultAccount.records);
                 }
