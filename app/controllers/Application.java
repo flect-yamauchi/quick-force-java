@@ -149,7 +149,7 @@ public class Application extends Controller {
             System.out.println("authInfo.instanceUrl:"+authInfo.instanceUrl);
             CompletionStage<WSResponse> responsePromise = ws.url(authInfo.instanceUrl + "/services/data/v34.0/query/")
                     .addHeader("Authorization", "Bearer " + authInfo.accessToken)
-                    .addQueryParameter("q", "SELECT Id, Name, Type, Industry FROM Account")
+                    .addQueryParameter("q", "SELECT Id, Name FROM ccrz__E_Product__c")
                     .get();
 
             return responsePromise.thenCompose(response -> {
