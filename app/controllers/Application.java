@@ -41,7 +41,7 @@ public class Application extends Controller {
         if (isSetup()) {
             if (code == null) {
                 // start oauth
-                final String url = "https://login.salesforce.com/services/oauth2/authorize?response_type=code" +
+                final String url = "https://test.salesforce.com/services/oauth2/authorize?response_type=code" +
                         "&client_id=" + force.consumerKey() +
                         "&redirect_uri=" + oauthCallbackUrl(request());
                 return CompletableFuture.completedFuture(redirect(url));
@@ -89,7 +89,7 @@ public class Application extends Controller {
         }
 
         CompletionStage<AuthInfo> getToken(String code, String redirectUrl) {
-            final CompletionStage<WSResponse> responsePromise = ws.url("https://login.salesforce.com/services/oauth2/token")
+            final CompletionStage<WSResponse> responsePromise = ws.url("https://test.salesforce.com/services/oauth2/token")
                     .addQueryParameter("grant_type", "authorization_code")
                     .addQueryParameter("code", code)
                     .addQueryParameter("client_id", consumerKey())
