@@ -27,6 +27,7 @@ public class Application extends Controller {
         try {
             force.consumerKey();
             force.consumerSecret();
+            force.consumerBasedomain();
             return true;
         } catch (Exception e) {
             return false;
@@ -41,7 +42,7 @@ public class Application extends Controller {
         if (isSetup()) {
             if (code == null) {
                 // start oauth
-                final String url = "https://test.salesforce.com/services/oauth2/authorize?response_type=code" +
+                final String url = "https://"+force.consumerBasedomain()+"/services/oauth2/authorize?response_type=code" +
                         "&client_id=" + force.consumerKey() +
                         "&redirect_uri=" + oauthCallbackUrl(request());
                 return CompletableFuture.completedFuture(redirect(url));
@@ -87,9 +88,13 @@ public class Application extends Controller {
         String consumerSecret() {
             return config.getString("consumer.secret");
         }
+        
+        String consumerBasedomain() {
+            return config.getString("consumer.basedomain");
+        }
 
         CompletionStage<AuthInfo> getToken(String code, String redirectUrl) {
-            final CompletionStage<WSResponse> responsePromise = ws.url("https://test.salesforce.com/services/oauth2/token")
+            final CompletionStage<WSResponse> responsePromise = ws.url("https://"+consumerBasedomain()+"/services/oauth2/token")
                     .addQueryParameter("grant_type", "authorization_code")
                     .addQueryParameter("code", code)
                     .addQueryParameter("client_id", consumerKey())
