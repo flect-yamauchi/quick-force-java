@@ -11,6 +11,7 @@
             <th>Type</th>
             <th>Industry</th>
             <th>Rating</th>
+            <th>Beerpass_Status/th>
         </tr>
         @accounts.map { account =>
             <tr>
@@ -19,6 +20,7 @@
                 <td>@account.Type</td>
                 <td>@account.Industry</td>
                 <td>@account.Rating</td>
+                <td>@account.Beerpass_Status__c</td>
             </tr>
         }
     </table>
