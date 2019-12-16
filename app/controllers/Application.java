@@ -147,7 +147,7 @@ public class Application extends Controller {
         CompletionStage<List<Account>> getAccounts(AuthInfo authInfo) {
             System.out.println("authInfo.accessToken:"+authInfo.accessToken);
             System.out.println("authInfo.instanceUrl:"+authInfo.instanceUrl);
-            CompletionStage<WSResponse> responsePromise = ws.url(authInfo.instanceUrl + "/services/data/v34.0/query/")
+            CompletionStage<WSResponse> responsePromise = ws.url(authInfo.instanceUrl + "/services/data/v47.0/query/")
                     .addHeader("Authorization", "Bearer " + authInfo.accessToken)
                     .addQueryParameter("q", "SELECT Id, Name FROM ccrz__E_Product__c")
                     .get();
