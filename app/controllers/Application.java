@@ -119,6 +119,8 @@ public class Application extends Controller {
         public static class Account {
             public String Id;
             public String Name;
+            public String Beerpass_Status;
+            public String Beerpass_Status__c;
             public String Type;
             public String Industry;
             public String Rating;
@@ -160,7 +162,7 @@ public class Application extends Controller {
                     return completableFuture;
                 } else {
                     System.out.println("SUCCESS:QUERY RUNNIG");
-                    System.out.println("JSON value:"+jsonNode.textValue());
+                    System.out.println("JSON value:"+jsonNode.	toString());
                     QueryResultAccount queryResultAccount = Json.fromJson(jsonNode, QueryResultAccount.class);
                     return CompletableFuture.completedFuture(queryResultAccount.records);
                 }
