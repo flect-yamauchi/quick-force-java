@@ -151,7 +151,7 @@ public class Application extends Controller {
             System.out.println("authInfo.instanceUrl:"+authInfo.instanceUrl);
             CompletionStage<WSResponse> responsePromise = ws.url(authInfo.instanceUrl + "/services/data/v47.0/query/")
                     .addHeader("Authorization", "Bearer " + authInfo.accessToken)
-                    .addQueryParameter("q", "SELECT Id, Name, Beerpass_Status__c FROM Contact")
+                    .addQueryParameter("q", "SELECT Id, Name, toLabel(Beerpass_Status__c) FROM Contact")
                     .get();
 
             return responsePromise.thenCompose(response -> {
@@ -162,7 +162,7 @@ public class Application extends Controller {
                     return completableFuture;
                 } else {
                     System.out.println("SUCCESS:QUERY RUNNIG");
-                    System.out.println("JSON value:"+jsonNode.	toString());
+                    System.out.println("JSON value:"+jsonNode.toString());
                     QueryResultAccount queryResultAccount = Json.fromJson(jsonNode, QueryResultAccount.class);
                     return CompletableFuture.completedFuture(queryResultAccount.records);
                 }
